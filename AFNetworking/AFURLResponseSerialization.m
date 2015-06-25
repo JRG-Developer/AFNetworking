@@ -754,8 +754,8 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 
         NSError *serializerError = nil;
         id responseObject = [serializer responseObjectForResponse:response data:data error:&serializerError];
-        if (responseObject) {
-            if (error) {
+        if (responseObject || serializerError) {
+            if (error && serializerError) {
                 *error = AFErrorWithUnderlyingError(serializerError, *error);
             }
 
